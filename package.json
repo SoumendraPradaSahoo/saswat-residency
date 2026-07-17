@@ -1,0 +1,11 @@
+{
+  "name": "saswat-residency-website",
+  "version": "1.0.0",
+  "description": "Production-ready static website for Saswat Residency, Paradeep, Odisha.",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve . -l 3000",
+    "start": "npx serve ."
+  },
+  "license": "UNLICENSED"
+}

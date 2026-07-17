@@ -1,0 +1,13 @@
+{
+  "name": "Saswat Residency",
+  "short_name": "Saswat Residency",
+  "description": "1BHK & 2BHK residences in Paradeep, Odisha.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf8f4",
+  "theme_color": "#0f2a24",
+  "icons": [
+    { "src": "/images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/images/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
