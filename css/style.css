@@ -785,6 +785,9 @@ input, textarea, select { font-family: inherit; }
   margin-bottom: 22px; font-size: 13px; color: var(--color-ink-soft);
 }
 .consent-row input { margin-top: 3px; }
+.consent-row.has-error { outline: 1px solid var(--color-error); outline-offset: 6px; border-radius: 8px; }
+#consent-error { display: none; margin: -14px 0 20px; }
+.consent-row.has-error + #consent-error { display: block; }
 
 .form-status {
   margin-top: 16px;
