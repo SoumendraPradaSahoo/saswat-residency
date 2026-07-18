@@ -664,10 +664,11 @@
               </div>
             </div>
 
-            <label class="consent-row">
-              <input type="checkbox" required>
+           <label class="consent-row" id="consent-row">
+              <input type="checkbox" id="consent" name="consent" required>
               <span>I agree to be contacted by Saswat Residency regarding my enquiry.</span>
             </label>
+            <span class="field-error" id="consent-error">Please check this box so we can contact you back.</span>
 
             <button type="submit" class="btn btn-primary btn-block">Send Enquiry</button>
             <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
