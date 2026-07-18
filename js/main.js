@@ -235,13 +235,21 @@
       }
     }
 
-    Object.keys(validators).forEach(function (name) {
+   Object.keys(validators).forEach(function (name) {
       var field = form.elements[name];
       if (!field) return;
       field.addEventListener('blur', function () {
         setFieldError(field, validators[name](field.value));
       });
     });
+
+    var consentCheckbox = form.elements['consent'];
+    var consentRowEl = document.getElementById('consent-row');
+    if (consentCheckbox && consentRowEl) {
+      consentCheckbox.addEventListener('change', function () {
+        if (consentCheckbox.checked) consentRowEl.classList.remove('has-error');
+      });
+    }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -258,6 +266,15 @@
         setFieldError(field, error);
         if (error) valid = false;
       });
+
+      var consentBox = form.elements['consent'];
+      var consentRow = document.getElementById('consent-row');
+      if (consentBox && !consentBox.checked) {
+        valid = false;
+        if (consentRow) consentRow.classList.add('has-error');
+      } else if (consentRow) {
+        consentRow.classList.remove('has-error');
+      }
 
       if (!valid) {
         showStatus('Please fix the highlighted fields and try again.', 'error');
