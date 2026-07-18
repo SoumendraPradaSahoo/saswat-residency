@@ -271,13 +271,34 @@
         submitBtn.textContent = 'Sending…';
       }
 
-      var endpoint = form.getAttribute('action');
+     var endpoint = form.getAttribute('action');
+      var isGoogleScript = endpoint && endpoint.indexOf('script.google.com') !== -1;
+
+      if (isGoogleScript) {
+        // Google Apps Script doesn't allow the browser to read its response,
+        // so we send the data and simply trust it worked if no network error occurred.
+        fetch(endpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new FormData(form)
+        })
+          .then(function () {
+            showStatus('Thank you! Your enquiry has been received. Our team will contact you shortly.', 'success');
+            form.reset();
+          })
+          .catch(function () {
+            openMailFallback();
+            showStatus('We could not reach our server, so we opened an email draft for you instead.', 'error');
+          })
+          .finally(function () {
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
+          });
+        return;
+      }
+
       var usesPlaceholder = !endpoint || endpoint.indexOf('your-form-id') !== -1;
 
       if (usesPlaceholder) {
-        // No real backend configured yet — fall back to a pre-filled email draft
-        // so the site is fully usable out of the box. See README for how to
-        // wire this up to Formspree / Getform / a serverless function instead.
         setTimeout(function () {
           openMailFallback();
           if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
